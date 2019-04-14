@@ -30,7 +30,8 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+     return num % 15 == 0 ? 'FizzBuzz' : num % 3 == 0 ? 'Fizz' : num % 5 == 0 ? 'Buzz' : num;  
+
 }
 
 
@@ -46,7 +47,8 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    if  (n === 1) return 1;
+  return n * getFactorial(n-1);
 }
 
 
@@ -63,7 +65,11 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let sum = 0; 
+    for (let i = n1; i <= n2; i++) { 
+        sum += i; 
+    } 
+    return sum;
 }
 
 
@@ -82,7 +88,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    return a + b > c && b + c > a && c + a > b;
 }
 
 
@@ -119,7 +125,7 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    return rect2.top - rect1.top - rect1.height <= 0 && rect2.left - rect1.left - rect1.width <= 0;
 }
 
 
@@ -150,7 +156,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return Math.pow(point.x - circle.center.x, 2) + Math.pow(point.y - circle.center.y, 2) < Math.pow(circle.radius, 2);
 }
 
 
@@ -166,7 +172,11 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    for(let i = 0; i < str.length; i++) {
+        if (str.indexOf(str[i]) === i && !str.includes(str[i], i + 1)) {
+          return str[i];
+        }
+    }
 }
 
 
@@ -209,7 +219,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split("").reverse().join("");
 }
 
 
@@ -226,7 +236,11 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    var str = num.toString();
+    var arr = str.split("");
+    arr = arr.reverse();
+    arr =  arr.join("");
+    return Number(arr); 
 }
 
 
@@ -251,8 +265,15 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
-}
+    const arr = [...ccn.toString()]
+    .reverse()
+    .map( (x) => parseInt(x) )
+    .map( (x,idx) => idx % 2 ? x * 2 : x )
+    .map( (x) => x > 9 ? (x % 10) + 1 : x )
+
+  return !(arr.reduce((acc, x) => acc += +x, 0) % 10);
+    
+         }
 
 
 /**
@@ -270,7 +291,7 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    return (num - 1) % 9 + 1;
 }
 
 
@@ -296,7 +317,20 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+  let stringLen = str.length;
+  let bracketsConfig = [['[', ']'],['{', '}'], ['(', ')'], ['<', '>']];
+  for(let i = 0; i < stringLen; i++) {
+    bracketsConfig.forEach(function (bracket) {
+      let bracketBalance = bracket.join('');
+      let substr = str.indexOf(bracketBalance);
+
+      if (substr !== -1) {
+        str = str.replace(bracketBalance, '');
+      }
+    });
+  }
+
+  return !str;
 }
 
 
@@ -356,7 +390,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 
@@ -396,7 +430,20 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let product = [];
+
+  for (let i = 0; i < m1.length; i++) {
+    product.push([]);
+    for (let x = 0; x < m2[0].length; x++) {
+      let sum = 0;
+      for (let y = 0; y < m1[0].length; y++) {
+        sum += m1[i][y] * m2[y][x];
+      }
+      product[i].push(sum);
+    }
+  }
+
+  return product;
 }
 
 
